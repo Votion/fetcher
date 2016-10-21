@@ -1,0 +1,25 @@
+{
+  "name": "fetcher",
+  "version": "0.0.1",
+  "description": "A wrapper for the fetch API",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Votion/fetcher.git"
+  },
+  "author": "Seamus P. H. Leahy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Votion/fetcher/issues"
+  },
+  "homepage": "https://github.com/Votion/fetcher#readme",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "webpack": "^1.13.2"
+  }
+}
