@@ -1,5 +1,7 @@
 'use strict';
 
-const fetch = factory(global.fetch, global.Header, global.FormData);
+const factory = require('./factory');
+
+const fetcher = factory(global.fetch, global.Header, global.FormData);
 
 module.exports = fetcher;

@@ -22,8 +22,11 @@ const config = {
                 exclude: /(node_modules|bower_components)/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015']
-                }
+                    presets: ['es2015'],
+                    comments: false
+                },
+
+                plugins: ['transform-runtime']
             }
         ]
     },
@@ -32,12 +35,8 @@ const config = {
         extensions: ['.js']
     },
 
-    externals: [
-        {
-            'fetch': 'fetch',
-            'FormData': 'FormData',
-            'Headers': 'Headers'
-        }
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin()
     ]
 };
 

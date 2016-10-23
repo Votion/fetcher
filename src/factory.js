@@ -90,10 +90,10 @@ function factory(fetch, Header, FormData) {
         }
 
         if (format === 'form') {
-            const flattenFormData = flattenFormData(data);
+            const formDataNameValue = flattenFormData(data);
             const formData = new FormData();
-            for (let varName in flattenFormData) {
-                formData.append(varName, flattenFormData[varName]);
+            for (let varName in formDataNameValue) {
+                formData.append(varName, formDataNameValue[varName]);
             }
             return formData;
         }
