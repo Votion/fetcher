@@ -57,7 +57,7 @@ function factory(fetch, Header, FormData) {
             body
         };
 
-        const fetchJsonPromise = new Promise(function (accept, reject) {
+        const fetchPromise = new Promise(function (accept, reject) {
             fetch(actionUrl, fetchOptions)
                 .then(function (response) {
                     if (response.ok !== false) {
@@ -73,12 +73,12 @@ function factory(fetch, Header, FormData) {
 
         // Force a min delay before a response is given
         if (options.minDelay) {
-            return Promise.all([fetchJsonPromise, Promise.delay(options.minDelay)])
+            return Promise.all([fetchPromise, Promise.delay(options.minDelay)])
                 .then(function (values) {
                     return new Promise((resolve) => resolve(values[0]));
                 });
         } else {
-            return fetchJsonPromise;
+            return fetchPromise;
         }
     }
 
