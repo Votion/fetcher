@@ -61,9 +61,11 @@ function factory(fetch, Header, FormData) {
             fetch(actionUrl, fetchOptions)
                 .then(function (response) {
                     if (response.ok !== false) {
-                        return accept({data: convertResponseContent(response, acceptMimeType), response});
+                        convertResponseContent(response, acceptMimeType).then((data) => {
+                            accept({data, response});
+                        });
                     } else {
-                        return reject(response);
+                        reject(response);
                     }
                 });
         });
