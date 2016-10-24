@@ -92,8 +92,10 @@ function factory(fetch, Header, FormData) {
         if (format === 'form') {
             const formDataNameValue = flattenFormData(data);
             const formData = new FormData();
-            for (let varName in formDataNameValue) {
-                formData.append(varName, formDataNameValue[varName]);
+            for (let i = 0; i < formDataNameValue.length; ++i) {
+                const name = formDataNameValue[i][0];
+                const value = formDataNameValue[i][1];
+                formData.append(name, value);
             }
             return formData;
         }
