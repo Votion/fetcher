@@ -36,7 +36,15 @@ const config = {
     },
 
     plugins: [
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin({
+            comments: true,
+            compress: {
+                drop_console: true,
+                dead_code: true,
+            },
+            mangle: false,
+            beautify: true
+        })
     ]
 };
 
