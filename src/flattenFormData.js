@@ -34,9 +34,8 @@ function flattenObject(data, flattendData = [], prefix = []) {
  * @returns {Array}
  */
 function flattenArray(data, flattendData = [], prefix = []) {
-    const keyPath = prefix.concat(['']);
-
     for (let i = 0; i < data.length; ++i) {
+        const keyPath = prefix.concat(['']); // Need a new instances of this each time although it is the same
         const value = data[i];
 
         if (isIterable(value)) {
