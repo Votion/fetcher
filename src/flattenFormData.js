@@ -9,20 +9,20 @@
  */
 function flattenObject(data, flattendData = [], prefix = []) {
 
-    for (let name in data) {
-        const value = data[name];
-        const keyPath = prefix.concat([name]);
+  for (let name in data) {
+    const value = data[name];
+    const keyPath = prefix.concat([name]);
 
-        if (isIterable(value)) {
-            flattenArray(value, flattendData, keyPath);
+    if (isIterable(value)) {
+      flattenArray(value, flattendData, keyPath);
 
-        } else if (isObject(value)) {
-            flattenObject(value, flattendData, keyPath);
+    } else if (isObject(value)) {
+      flattenObject(value, flattendData, keyPath);
 
-        } else {
-            flattendData.push([makeKeyName(keyPath), typeof value === 'object' ? value.valueOf() : value]);
-        }
+    } else {
+      flattendData.push([makeKeyName(keyPath), typeof value === 'object' ? value.valueOf() : value]);
     }
+  }
 }
 
 /**
@@ -34,20 +34,20 @@ function flattenObject(data, flattendData = [], prefix = []) {
  * @returns {Array}
  */
 function flattenArray(data, flattendData = [], prefix = []) {
-    for (let i = 0; i < data.length; ++i) {
-        const keyPath = prefix.concat(['']); // Need a new instances of this each time although it is the same
-        const value = data[i];
+  for (let i = 0; i < data.length; ++i) {
+    const keyPath = prefix.concat(['']); // Need a new instances of this each time although it is the same
+    const value = data[i];
 
-        if (isIterable(value)) {
-            flattenArray(value, flattendData, keyPath);
+    if (isIterable(value)) {
+      flattenArray(value, flattendData, keyPath);
 
-        } else if (isObject(value)) {
-            flattenObject(value, flattendData, keyPath);
+    } else if (isObject(value)) {
+      flattenObject(value, flattendData, keyPath);
 
-        } else {
-            flattendData.push([makeKeyName(keyPath), typeof value === 'object' ? value.valueOf() : value]);
-        }
+    } else {
+      flattendData.push([makeKeyName(keyPath), typeof value === 'object' ? value.valueOf() : value]);
     }
+  }
 }
 
 /**
@@ -57,7 +57,7 @@ function flattenArray(data, flattendData = [], prefix = []) {
  * @returns {boolean}
  */
 function isObject(data) {
-    return typeof data === 'object' && typeof data.valueOf() === 'object';
+  return typeof data === 'object' && typeof data.valueOf() === 'object';
 }
 
 /**
@@ -67,7 +67,7 @@ function isObject(data) {
  * @returns {boolean}
  */
 function isIterable(data) {
-    return data instanceof Array; // TODO check for iterables
+  return data instanceof Array; // TODO check for iterables
 }
 
 /**
@@ -77,9 +77,13 @@ function isIterable(data) {
  * @returns {string}
  */
 function makeKeyName(keyPath) {
-    const initialKey = keyPath.shift();
+  const initialKey = keyPath.shift();
 
+  if (keyPath.length) {
     return `${initialKey}[${keyPath.join('][')}]`;
+  } else {
+    return initialKey;
+  }
 }
 
 /**
@@ -88,10 +92,10 @@ function makeKeyName(keyPath) {
  * @example
  * {
  *   foo: [
- *     {
- *       bar: 77
- *     },
- *     'car'
+ *   {
+ *     bar: 77
+ *   },
+ *   'car'
  *   ]
  * }
  *
@@ -105,13 +109,13 @@ function makeKeyName(keyPath) {
  * @returns {Array}
  */
 function flattenFormData(data) {
-    if (!isObject(data)) {
-        return [];
-    }
+  if (!isObject(data)) {
+    return [];
+  }
 
-    const flattenData = [];
-    flattenObject(data, flattenData);
-    return flattenData;
+  const flattenData = [];
+  flattenObject(data, flattenData);
+  return flattenData;
 }
 
 module.exports = flattenFormData;

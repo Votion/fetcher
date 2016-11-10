@@ -1,6 +1,6 @@
 {
   "name": "fetcher",
-  "version": "0.0.1",
+  "version": "0.0.2w",
   "description": "A wrapper for the fetch API",
   "main": "lib/index.js",
   "scripts": {
